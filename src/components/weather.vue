@@ -25,9 +25,14 @@ export default {
       interval: null,
       intervalTime: null,
       PMQuality: '',
+      distance: .01,
     }
   },
   props:{
+    updateDuration:{
+      type: Number,
+      default: 10,
+    }
   },
   mounted() {
     this.init();
@@ -36,7 +41,7 @@ export default {
     },1000);
     this.interval = setInterval(() => {
       this.init()
-    },600000);
+    },this.updateDuration * 60000);
   },
   components: {
   },
@@ -55,33 +60,48 @@ export default {
           if (msg !== 'error') {
             weather.getLive(datas.addressComponent.city, function(err, data) {
               if (!err) {
-                _this.weatherInfo = data
+                _this.weatherInfo = data;
                 console.log(_this.weatherInfo)
               }
             });
-            getData.getAirQuality(`${datas.position.lat-.1},${datas.position.lng-.1},${datas.position.lat+.1},${datas.position.lng+.1}`).then(res => {
-              res.data.forEach(val => {
-                if (val.city.indexOf(_this.weatherInfo.city.replace(/市/,'')) > -1) {
-                  if (val.aqi <= 35) {
-                    _this.PMQuality = '优';
-                  } else if (val.aqi <= 75) {
-                    _this.PMQuality = '良';
-                  } else if (val.aqi <= 115) {
-                    _this.PMQuality = '轻度污染';
-                  } else if (val.aqi <= 150) {
-                    _this.PMQuality = '中度污染';
-                  } else if (val.aqi <= 250) {
-                    _this.PMQuality = '重度污染';
-                  } else {
-                    _this.PMQuality = '严重污染';
-                  }
-                }
-              })
-            })
+            _this.getQuality(datas);
           }
         })
       });
-    }
+    },
+    getQuality (datas) {
+      getData.getAirQuality(`${datas.position.lat-this.distance},${datas.position.lng-this.distance},${datas.position.lat+this.distance},${datas.position.lng+this.distance}`).then(res => {
+        //console.log(res.data)
+        if (res.data.length === 0) {
+          this.distance += .01;
+          this.getQuality(datas);
+        } else {
+          let getCity = false;
+          res.data.forEach(val => {
+            if (val.city.indexOf(this.weatherInfo.city.replace(/市/,'')) > -1) {
+              getCity = true;
+              if (val.aqi <= 35) {
+                this.PMQuality = '优';
+              } else if (val.aqi <= 75) {
+                this.PMQuality = '良';
+              } else if (val.aqi <= 115) {
+                this.PMQuality = '轻度污染';
+              } else if (val.aqi <= 150) {
+                this.PMQuality = '中度污染';
+              } else if (val.aqi <= 250) {
+                this.PMQuality = '重度污染';
+              } else {
+                this.PMQuality = '严重污染';
+              }
+            }
+          });
+          if (!getCity) {
+            this.distance += .01;
+            this.getQuality(datas);
+          }
+        }
+      })
+    },
   }
 }
 </script>

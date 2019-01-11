@@ -14,6 +14,10 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 
+parameter
+
+updateDuration: update duration(更新时长)(unit:minutes)
+
 Demo
 
 https://qsued-teams.github.io/location-weather-airQuality/dist/index.html

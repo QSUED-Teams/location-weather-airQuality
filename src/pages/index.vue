@@ -3,7 +3,7 @@
     <div class="g-header">
       <!--<img src="../assets/images/logo3.png" class="g-logo" alt="">-->
       <img src="" class="g-logo" alt="">
-      <v-weather class="g-title"></v-weather>
+      <v-weather class="g-title" :updateDuration="10"></v-weather>
     </div>
   </div>
 </template>
