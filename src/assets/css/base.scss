@@ -1,0 +1,88 @@
+@import './mixin';
+
+body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4, h5, h6, i, b, textarea, button, input, select, figure, figcaption {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-style: normal;
+  text-decoration: none;
+  border: none;
+  color: $blue;
+  font-size: .16rem;
+  box-sizing: border-box;
+  font-family: "Microsoft Yahei", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  &:focus {
+    outline: none;
+  }
+}
+
+/* WebKit browsers */
+::-webkit-input-placeholder {
+  　　color: #999;
+}
+
+/*input, select, button{
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+}*/
+/*很关键：将默认的select选择框样式清除*/
+select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  padding-right: 14px; /*加padding防止文字覆盖*/
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: .15rem;
+  background-color: #d4eafa;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  width: .2rem;
+  -webkit-box-shadow: inset 0 0 1px rgba(0, 158, 232, .3);
+  //border-radius: 55px;
+  background-color: #d4eafa;
+}
+
+::-webkit-scrollbar-track-piece {
+
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  border: .02rem solid #d4eafa;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 158, 232, .3);
+  background-color: #009ee8;
+}
+
+.flex-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis2 {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
