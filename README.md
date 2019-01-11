@@ -16,3 +16,6 @@ npm run build --report
 
 Demo
 
+https://qsued-teams.github.io/location-weather-airQuality/dist/index.html
+
+![Image text](http://static-demo.joubn.com/FqGdZGenVNvJn6J2zGDcWOdOWJXe)

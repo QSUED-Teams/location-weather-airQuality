@@ -11,39 +11,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/echarts2': {
-        target: 'http://echarts.baidu.com',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/echarts2': '/echarts2'
-        }
-      },
-      '/park_cms': {
-        target: 'http://192.168.0.126:8080',//http://www.hpaxcf.com/
-        // target: 'http://192.168.0.145:8080/park_cms/',//http://www.hpaxcf.com/
-        changeOrigin: true,
-        pathRewrite: {
-          '^/park_cms': '/park_cms'
-        }
-      },
-      '/api': {
-        target: 'http://test-pk-ht.hzqisheng.cn',//http://www.hpaxcf.com/
-        // target: 'http://192.168.0.145:8080/park_cms/',//http://www.hpaxcf.com/
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/api'
-        }
-      },
-      '/mp': {
-        // target: 'http://192.168.0.154:8088/park_cms/',//http://www.hpaxcf.com/
-        // target: 'http://192.168.0.145:8080',//http://www.hpaxcf.com/
-        target: 'http://192.168.0.108',//http://www.hpaxcf.com/
-        // target: 'http://192.168.0.178:8080/park_cms/',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/mp': '/mp'
-        }
-      },
       '/mapq': {
         target: 'https://api.waqi.info/',
         changeOrigin: true,
