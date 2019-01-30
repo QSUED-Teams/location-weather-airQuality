@@ -75,7 +75,7 @@ export default {
       try{
         cityJson.cityJson.forEach(city => {
           if (city['city_name'].match(cityReg) && city['city_code']) {
-            getData.getAirQuality(city['city_name']).then(res => {
+            getData.getAirQuality(city['city_code']).then(res => {
               //console.log(res)
               if (res.data.aqi <= 50) {
                 this.PMQuality = '优';
