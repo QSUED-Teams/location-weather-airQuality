@@ -12,6 +12,7 @@
 
 <script>
 import * as getData from './../service/getData'
+import * as cityJson from '../../static/js/city'
 import * as mobile from './../config/mUtils'
 import {mapState, mapMutations,mapActions} from 'vuex'
 import { lazyAMapApiLoaderInstance } from 'vue-amap';
@@ -62,15 +63,41 @@ export default {
               if (!err) {
                 _this.weatherInfo = data;
                 console.log(_this.weatherInfo)
+                _this.getQuality(datas);
               }
             });
-            _this.getQuality(datas);
           }
         })
       });
     },
     getQuality (datas) {
-      getData.getAirQuality(`${datas.position.lat-this.distance},${datas.position.lng-this.distance},${datas.position.lat+this.distance},${datas.position.lng+this.distance}`).then(res => {
+      const cityReg = new RegExp(this.weatherInfo.city.replace(/市/,''));
+      try{
+        cityJson.cityJson.forEach(city => {
+          if (city['city_name'].match(cityReg) && city['city_code']) {
+            getData.getAirQuality(city['city_name']).then(res => {
+              //console.log(res)
+              if (res.data.aqi <= 50) {
+                this.PMQuality = '优';
+              } else if (res.data.aqi <= 100) {
+                this.PMQuality = '良';
+              } else if (res.data.aqi <= 150) {
+                this.PMQuality = '轻度污染';
+              } else if (res.data.aqi <= 200) {
+                this.PMQuality = '中度污染';
+              } else if (res.data.aqi <= 300) {
+                this.PMQuality = '重度污染';
+              } else {
+                this.PMQuality = '严重污染';
+              }
+            });
+            throw 'Jump out now!'//在这里抛出异常
+          }
+        });
+      } catch (e) {
+        console.log(e)
+      }
+      /*getData.getAirQuality(`${datas.position.lat-this.distance},${datas.position.lng-this.distance},${datas.position.lat+this.distance},${datas.position.lng+this.distance}`).then(res => {
         //console.log(res.data)
         if (res.data.length === 0) {
           this.distance += .01;
@@ -100,7 +127,7 @@ export default {
             this.getQuality(datas);
           }
         }
-      })
+      })*/
     },
   }
 }

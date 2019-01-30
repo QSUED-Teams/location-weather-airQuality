@@ -18,6 +18,13 @@ module.exports = {
           '^/mapq': '/mapq'
         }
       },
+      '/apis': {
+        target: 'http://api.help.bj.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/apis': '/apis'
+        }
+      },
     },
 
     // Various Dev Server settings
