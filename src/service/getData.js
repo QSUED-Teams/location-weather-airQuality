@@ -8,7 +8,7 @@ import axios from 'axios'
  */
 /*let getAirQuality = (bounds) => axios.get(`https://api.waqi.info/mapq/bounds/?bounds=${bounds}&inc=placeholders&k=_2Y2EvHR92GVocMydDSBRWXmpjeEQ9PStTFkYzZQ==&_=1547002148943`);*/
 
-let getAirQuality = (id) => axios.get(`http://api.help.bj.cn/apis/aqi?id=${id}`);
+let getAirQuality = (id) => axios.get(`https://api.help.bj.cn/apis/aqi?id=${id}`);
 
 export {
   getAirQuality
